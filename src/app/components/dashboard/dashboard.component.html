@@ -1,0 +1,74 @@
+<div class="contaier-fluid bg-light">
+    <div class="container bg-light">
+        <div class="row mt-4" style="height: 500px;">
+            <div class="col"></div>
+            <div class="col-md-8 bg-white shadow">
+                <div class="card bg-warning mt-4">
+                    <h4 class="text-white ps-3 pt-2 pb-2">To Do List</h4>
+                </div>
+
+                <div class="shadow">
+                    <div class="p-3 flex">
+                        <input type="text" class="form-control" placeholder="Enter task title here..." name="title" id="title" #title [(ngModel)]="addTaskValue"/>
+                        <textarea class="form-control mt-3" placeholder="Enter task description here..." name="description" id="description" [(ngModel)]="addTaskDescription"></textarea>
+                        <button class="btn btn-outline-success btn_width mt-3" type="button" (click)="addTask()"><fa-icon [icon]="faPlus"></fa-icon></button>
+                    </div>
+                </div>
+
+                <h4 class="text-primary mt-4 task_header">Tasks</h4>
+
+                <div style="overflow-y: auto; height: 350px;">
+                    <div *ngIf="tasks.length > 0">
+                        <div class="m-3"  *ngFor="let task of tasks">
+                            <div class="p-2 shadow">
+                                <div class="input-group row ps-3">
+                                    <div class="card col-md-2 border-0 title">
+                                        {{task.title}}
+                                    </div>
+                                    <div class="card col-md-7 border-0">
+                                        {{task.description.substring(0,50)}}...
+                                    </div>
+                                    <button type="button" class="btn btn-outline-primary col me-2" data-bs-toggle="modal" data-bs-target="#myModal" (click)="call(task)"> <fa-icon [icon]="faEdit"></fa-icon></button>
+                                    <button class="btn btn-outline-danger col" (click)="deleteTask(task)"> <fa-icon [icon]="faTrash" ></fa-icon></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div *ngIf="tasks.length == 0">
+                        <p class="text-center">No Tasks</p>
+                    </div>
+                    
+                </div>
+             
+  
+                <!-- Modal -->
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Edit Task</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="p-3 flex">
+                                <input type="text" class="form-control" 
+                                placeholder="Enter task title here..." 
+                                name="task" [(ngModel)]="editTaskValue" [value]="editTaskValue"/>
+                                <textarea class="form-control mt-3" 
+                                placeholder="Enter task description here..." 
+                                name="task_description" [(ngModel)]="editTaskDescription">{{editTaskDescription}}</textarea>                                
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-outline-success btn_width mt-3" type="button" data-bs-dismiss="modal" (click)="editTask()"><fa-icon [icon]="faEdit"></fa-icon></button>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="col"></div>
+        </div>
+    </div>
+</div>
