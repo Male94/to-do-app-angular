@@ -1,4 +1,4 @@
-Run npm install comman first.
+Run npm install command first.
 
 # TodoList
 
